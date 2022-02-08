@@ -1,12 +1,12 @@
 --Use SD30-Company: 
---1 Create trigger to handle any delete operation on the Employee table to be “Soft Delete” not “Hard Delete”.
+--1 Create trigger to handle any delete operation on the Employee table to be â€œSoft Deleteâ€ not â€œHard Deleteâ€.
 
---a In Employee table add new column of type bit with name “IsDeleted” and make default for it to be “False”.
+--a In Employee table add new column of type bit with name â€œIsDeletedâ€ and make default for it to be â€œFalseâ€.
 ALTER TABLE [dbo].[Employee]
 ADD IsDeleted bit NOT NULL DEFAULT(0)
 GO
 
---b When any user tries to delete Employee, don’t allow the delete Operation, and instead of it update the “IsDeleted” to be “True” for the  deleted employee (s).
+--b When any user tries to delete Employee, donâ€™t allow the delete Operation, and instead of it update the â€œIsDeletedâ€ to be â€œTrueâ€ for the  deleted employee (s).
 Create Trigger PreventDelete
 on [dbo].[Employee] Instead Of Delete
 as
@@ -16,7 +16,7 @@ Begin
 	where [EmpNo] in (select [EmpNo] from deleted);
 End
 
---c Make a view Name “vActiveEmployee” to return all not deleted employees (Return all employee data without the “IsDeleted” column).
+--c Make a view Name â€œvActiveEmployeeâ€ to return all not deleted employees (Return all employee data without the â€œIsDeletedâ€ column).
 Create view vActiveEmpInfo
 As
 	Select [EmpNo],[FName],[LName],[DeptNo],[salary]  From [dbo].[Employee]
@@ -29,7 +29,7 @@ Delete From [dbo].[Employee] where [EmpNo]= 10102;
 --e Try to select from the view, and select all data from the table to see the differences.
 Select * From vActiveEmpInfo;
 
---2 Create a table named “BudgetChangeAudit”
+--2 Create a table named â€œBudgetChangeAuditâ€
 --This table will be used to audit the update trials on the Budget column (Project table)
 --Example:
 --If a user updated the budget column the project number, user name who made that update, the date of the modification and the value of the old and the new budget will be inserted into the Audit table
@@ -98,7 +98,7 @@ Select * From [dbo].[Employee]
 --a Make it return the following status return:
 --i (-1) if the employee fname less than 3 letters (do this check before insert opearation).
 --ii (-2) if the employee lname less than 3 letters(do this check before insert opearation).
---iii (-3) if the DeptNo FK sent to the procedure, isn’t  exist in the dept table (do this check before insert opearation, and you may use if (exixts())).
+--iii (-3) if the DeptNo FK sent to the procedure, isnâ€™t  exist in the dept table (do this check before insert opearation, and you may use if (exixts())).
 --iv (error No) if any other error occurred when doing insert operation (use @@error).
 --v. (0) if the operation is successfully done.
 --b. Call the procedure and print the value returned from it.
@@ -163,8 +163,8 @@ End
 
 Select * From Employee
 
-declare @n int
-exec InsertEmpErr6 9009, 'Nour', 'Mohamed', 'd3', 3499, 0, @n output
-select @n
+Declare @n int
+Exec InsertEmpErr6 9009, 'Nour', 'Mohamed', 'd3', 3499, 0, @n output
+Select @n
 
-select * from [dbo].[Employee]
+Select * From [dbo].[Employee]
