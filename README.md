@@ -1,3 +1,3 @@
 # SD30-Company-Questions
 
-For the seek of training I used SD30-Company database to answer business questions.
+For the seek of training I used SD30-Company database to answer business questions using MS SQL Server.
